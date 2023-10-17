@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duoc UC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            opacity: 0.8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        @media screen and (max-width: 600px) {
+            form {
+                flex-direction: column;
+            }
+        }
+    </style>
+
+</head>
+<body >
+    <h1>Bienvenido al sistema de inventario Duoc Uc Plaza Oste</h1>
+    <div>
+        <form action="/buscar/" method="POST">{%csrf_token%}
+            <input type="text" name="" id="texto_b">
+            <input type="button" value="buscar" >
+        </form>
+    </div>
+    <br>
+    <div >
+        <table style="align-items: center;">
+            <thead>
+                <tr>
+                    <th>N Serial</th>
+                    <th>Activo Fijo</th>
+                    <th>Año ingreso</th>
+                    <th>Año baja</th>
+                    <th>ubicacion</th>
+                    <th>Estado</th>
+                    <th>Contenido</th>
+                    <th>Historico</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for c in carros%}
+                <tr>
+                    <td>{{c.serial}}</td>
+                    <td>{{c.activo_fijo}}</td>
+                    <td>{{c.año_entrada}}</td>
+                    <td>{{c.año_baja}}</td>
+                    <td>{{c.ubicacion}}</td>
+                    <td>{{c.estado}}</td>
+                    <td><button><a href="">ver</a></button></td>
+                    <td><button><a href="historico/{{c.serial}}">ver</a></button></td>
+                </tr> 
+                {%endfor%}
+            </tbody>
+          </table>
+    </div>
+</body>
+</html>
