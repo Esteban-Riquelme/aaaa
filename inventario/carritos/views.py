@@ -37,3 +37,6 @@ def autenticate(request):
             return redirect('/login')
     else:
         return render(request, 'login.html')
+
+def notebook(request):
+    pass
