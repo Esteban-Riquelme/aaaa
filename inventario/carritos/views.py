@@ -4,6 +4,9 @@ from django.shortcuts import redirect, render
 from carritos.models import *
 
 # Create your views here.
+
+def index(request):
+    return render(request, 'home.html')
 def home(request):
     carritos= Carro.objects.all()
 
@@ -39,4 +42,11 @@ def autenticate(request):
         return render(request, 'login.html')
 
 def notebook(request):
-    pass
+    notebook= Notebook.objects.all()
+    return render(request,'notebook.html',{'note':notebook})
+
+
+def contenido(request, codigo):
+    serial =Carro.serial
+    contenido = Notebook.objects.filter(Carro=codigo)
+    return render(request,"notebook.html",{"con":contenido})

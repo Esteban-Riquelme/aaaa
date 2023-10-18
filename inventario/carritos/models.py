@@ -27,6 +27,7 @@ class Carro(models.Model):
 
 class Notebook(models.Model):
     serial= models.CharField(primary_key=True,max_length=20)
+    activo_fijo= models.CharField(max_length=20)
     marca=models.ForeignKey(Marca, on_delete=models.CASCADE)
     carro= models.ForeignKey(Carro, on_delete=models.CASCADE)
     def __str__(self):

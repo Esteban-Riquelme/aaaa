@@ -70,8 +70,10 @@
         }
 
         @media screen and (max-width: 600px) {
-            form {
-                flex-direction: column;
+            table, th, td {
+                width: 100%;
+                display: block;
+                text-align: left;
             }
         }
     </style>
@@ -79,42 +81,32 @@
 </head>
 <body >
     <h1>Bienvenido al sistema de inventario Duoc Uc Plaza Oste</h1>
-    <div>
-        <form action="/buscar/" method="POST">{%csrf_token%}
-            <input type="text" name="" id="texto_b">
-            <input type="button" value="buscar" >
-        </form>
-    </div>
+
     <br>
-    <div >
+    <div style="margin: 0 auto;">
         <table style="align-items: center;">
             <thead>
                 <tr>
                     <th>N Serial</th>
                     <th>Activo Fijo</th>
-                    <th>Año ingreso</th>
-                    <th>Año baja</th>
-                    <th>ubicacion</th>
+                    <th>Marca</th>
+                    <th>Carro</th>
                     <th>Estado</th>
-                    <th>Contenido</th>
-                    <th>Historico</th>
                 </tr>
             </thead>
             <tbody>
-                {%for c in carros%}
+                {%for n in note%}
                 <tr>
-                    <td>{{c.serial}}</td>
-                    <td>{{c.activo_fijo}}</td>
-                    <td>{{c.año_entrada}}</td>
-                    <td>{{c.año_baja}}</td>
-                    <td>{{c.ubicacion}}</td>
-                    <td>{{c.estado}}</td>
-                    <td><button><a href="contenido/{{c.serial}}">ver</a></button></td>
-                    <td><button><a href="historico/{{c.serial}}">ver</a></button></td>
+                    <td>{{n.serial}}</td>
+                    <td>{{n.activo_fijo}}</td>
+                    <td>{{n.marca}}</td>
+                    <td>{{n.carro}}</td>
+                    <td>{{n.estado}}</td>
                 </tr> 
                 {%endfor%}
             </tbody>
           </table>
     </div>
+    <a href="login/">click</a>
 </body>
 </html>
