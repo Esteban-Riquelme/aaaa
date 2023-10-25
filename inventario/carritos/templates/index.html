@@ -1,89 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duoc UC</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 20px;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            box-sizing: border-box;
-        }
-
-        button[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        button[type="submit"]:hover {
-            opacity: 0.8;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #ddd;
-        }
-
-        @media screen and (max-width: 600px) {
-            table, th, td {
-                width: 100%;
-                display: block;
-                text-align: left;
-            }
-        }
-    </style>
-
-</head>
-<body >
-    <h1>Bienvenido al sistema de inventario Duoc Uc Plaza Oste</h1>
-
+{%extends 'base.html'%}
+{%block content%}
+    <div>
+        <form action="/buscar/" method="POST">{%csrf_token%}
+            <input type="text" name="" id="texto_b">
+            <input type="button" value="buscar" >
+        </form>
+    </div>
     <br>
-    <div style="margin: 0 auto;">
+    <div >
         <table style="align-items: center;">
             <thead>
                 <tr>
@@ -93,6 +17,11 @@
                     <th>Año baja</th>
                     <th>ubicacion</th>
                     <th>Estado</th>
+                    {% if request.user.is_authenticated %}
+                    <th>Contenido</th>
+                    <th>Historico</th>
+                    {% endif %}
+                    
                 </tr>
             </thead>
             <tbody>
@@ -104,11 +33,14 @@
                     <td>{{c.año_baja}}</td>
                     <td>{{c.ubicacion}}</td>
                     <td>{{c.estado}}</td>
+                    {% if request.user.is_authenticated %}
+                    <td><button><a href="contenido/{{c.serial}}">ver</a></button></td>
+                    <td><button><a href="historico/{{c.serial}}">ver</a></button></td>
+                    {% endif %}
                 </tr> 
                 {%endfor%}
             </tbody>
           </table>
+          <a href="login">click</a>
     </div>
-    <a href="login/">click</a>
-</body>
-</html>
+    {%endblock%}

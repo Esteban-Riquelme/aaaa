@@ -77,44 +77,9 @@
     </style>
 
 </head>
-<body >
+<body>
     <h1>Bienvenido al sistema de inventario Duoc Uc Plaza Oste</h1>
-    <div>
-        <form action="/buscar/" method="POST">{%csrf_token%}
-            <input type="text" name="" id="texto_b">
-            <input type="button" value="buscar" >
-        </form>
-    </div>
-    <br>
-    <div >
-        <table style="align-items: center;">
-            <thead>
-                <tr>
-                    <th>N Serial</th>
-                    <th>Activo Fijo</th>
-                    <th>Año ingreso</th>
-                    <th>Año baja</th>
-                    <th>ubicacion</th>
-                    <th>Estado</th>
-                    <th>Contenido</th>
-                    <th>Historico</th>
-                </tr>
-            </thead>
-            <tbody>
-                {%for c in carros%}
-                <tr>
-                    <td>{{c.serial}}</td>
-                    <td>{{c.activo_fijo}}</td>
-                    <td>{{c.año_entrada}}</td>
-                    <td>{{c.año_baja}}</td>
-                    <td>{{c.ubicacion}}</td>
-                    <td>{{c.estado}}</td>
-                    <td><button><a href="contenido/{{c.serial}}">ver</a></button></td>
-                    <td><button><a href="historico/{{c.serial}}">ver</a></button></td>
-                </tr> 
-                {%endfor%}
-            </tbody>
-          </table>
-    </div>
+    {%block content%}
+    {%endblock%}
 </body>
 </html>

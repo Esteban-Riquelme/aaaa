@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect, render
 
 from carritos.models import *
@@ -6,11 +6,12 @@ from carritos.models import *
 # Create your views here.
 
 def index(request):
-    return render(request, 'home.html')
-def home(request):
     carritos= Carro.objects.all()
 
     return render(request, "index.html",{"carros": carritos})
+    
+def home(request):
+    return render(request, 'home.html')
 def vista(request):
     carritos= Carro.objects.all()
 
@@ -24,23 +25,22 @@ def historico(request, codigo):
     historico = Historico.objects.filter(serial=codigo)
     return render(request,"historico.html",{"historico":historico})
     
-def login(request):
-    return render(request, "login.html")
-def autenticate(request):
+
+def sigin(request):
+    if request.method == 'GET':
+        return render(request, "login.html")
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        if Usuario.objects.filter(user=username).exists():
-            user = Usuario.objects.get(user=username)
-            if user.passwrd== password:
-                return redirect('/vista')
-            else:
-                return redirect('/login')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('/index')
         else:
-            return redirect('/login')
+            error = "Usuario incorrecto"
+            return render(request, 'login.html', {'error':error})
     else:
-        return render(request, 'login.html')
-
+        return render(request, "login.html")
 def notebook(request):
     notebook= Notebook.objects.all()
     return render(request,'notebook.html',{'note':notebook})
