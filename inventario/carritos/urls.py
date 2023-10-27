@@ -12,5 +12,6 @@ urlpatterns =[
     path('notebook/', views.notebook, name='notebook'),
     path('contenido/', views.contenido, name='contenido'),
     path('index/login/', views.sigin, name='login'),
+    path('index/logout', views.sigout, name='sigout'),
 
 ]

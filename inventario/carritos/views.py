@@ -1,4 +1,5 @@
-from django.contrib.auth import authenticate, login
+from telnetlib import LOGOUT
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
 
 from carritos.models import *
@@ -50,3 +51,7 @@ def contenido(request, codigo):
     serial =Carro.serial
     contenido = Notebook.objects.filter(Carro=codigo)
     return render(request,"notebook.html",{"con":contenido})
+
+def sigout(request):
+    logout(request)
+    return render(request,'index.html')
