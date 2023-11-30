@@ -1,7 +1,40 @@
 {%extends 'base.html'%}
 {%block content%}
-    <a href="index/">carros</a>
-    <a href="notebook/">notebook</a>
     <a href=""></a>
     <a href=""></a>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <img src="img/producto1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Carros</h5>
+                        <p class="card-text">Aqui puedes encontrar toda la informacion de los carros</p>
+                        <a href="carros" class="btn btn-primary mb-3">ver carros</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3 ">
+                <div class="card">
+                    <img src="img/producto2.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Notebooks</h5>
+                        <p class="card-text">Aqui puedes encontrar toda la informacion de notebook</p>
+                        <a href="notebook" class="btn btn-primary mb-3">ver notebooks</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <img src="img/producto2.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Proyectores</h5>
+                        <p class="card-text">Aqui puedes ver todos los proyectores</p>
+                        <a href="proyector" class="btn btn-primary mb-3">ver proyectores</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {%endblock%}

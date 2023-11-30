@@ -1,89 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duoc UC</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 20px;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            box-sizing: border-box;
-        }
-
-        button[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        button[type="submit"]:hover {
-            opacity: 0.8;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #ddd;
-        }
-
-        @media screen and (max-width: 600px) {
-            table, th, td {
-                width: 100%;
-                display: block;
-                text-align: left;
-            }
-        }
-    </style>
-
-</head>
-<body >
-    <h1>Bienvenido al sistema de inventario Duoc Uc Plaza Oste</h1>
-
-    <br>
+{%extends 'base.html'%}
+{%block content%}
     <div style="margin: 0 auto;">
+        <form method="POST" class="row g-3"> {% csrf_token %}
+            <div class="col-auto">
+              <h5>Ingrese numero serial</h5>
+            </div>
+            <div class="col-auto">
+              <input type="text" class="form-control" name="activo" placeholder="3RDS34">
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+            </div>
+        </form>
         <table style="align-items: center;">
             <thead>
                 <tr>
@@ -91,22 +19,53 @@
                     <th>Activo Fijo</th>
                     <th>Marca</th>
                     <th>Carro</th>
-                    <th>Estado</th>
+                    <th>ubicacion</th>
+                    {% if perms.notebook %}
+                    <th>Historico</th>
+                    {% endif %}
+
                 </tr>
             </thead>
             <tbody>
-                {%for n in note%}
+                {%if ac%}
                 <tr>
-                    <td>{{n.serial}}</td>
-                    <td>{{n.activo_fijo}}</td>
-                    <td>{{n.marca}}</td>
-                    <td>{{n.carro}}</td>
-                    <td>{{n.estado}}</td>
-                </tr> 
+                    <td>{{ac.serial}}</td>
+                    <td>{{ac.activo_fijo}}</td>
+                    <td>{{ac.marca}}</td>
+                    <td>{{ac.carro}}</td>
+                    <td>{{ac.ubicacion}}</td>
+                    {% if perms.notebook %}
+                    <td><a href="historico/{{ac.serial}}" class="btn btn-primary mb-3">ver</a></td>
+                    {% endif %}
+                </tr>
+                {%endif%}
+                {%if note%}
+                    {%for n in note%}
+                    <tr>
+                        <td>{{n.serial}}</td>
+                        <td>{{n.activo_fijo}}</td>
+                        <td>{{n.marca}}</td>
+                        <td>{{n.carro}}</td>
+                        <td>{{n.ubicacion}}</td>
+                        {% if perms.notebook %}
+                        <td><a href="historico/{{n.serial}}" class="btn btn-primary mb-3">ver</a></td>
+                        {% endif %}
+                    </tr> 
+                    {%endfor%}
+                {%endif%}
+                {%for c in con%}
+                    <tr>
+                        <td>{{c.serial}}</td>
+                        <td>{{c.activo_fijo}}</td>
+                        <td>{{c.marca}}</td>
+                        <td>{{c.carro}}</td>
+                        <td>{{c.ubicacion}}</td>
+                        {% if perms.notebook %}
+                        <td><a href="historico/{{c.serial}}" class="btn btn-primary mb-3">ver</a></td>
+                        {% endif %}
+                    </tr> 
                 {%endfor%}
             </tbody>
-          </table>
+        </table>
     </div>
-    <a href="login/">click</a>
-</body>
-</html>
+{%endblock%}

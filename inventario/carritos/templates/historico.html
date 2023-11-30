@@ -1,72 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-    }
+{%extends 'base.html'%}
+{%block content%}
 
-    h1 {
-        background-color: #4CAF50;
-        color: white;
-        padding: 20px;
-        text-align: center;
-    }
-
-    form {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 20px;
-    }
-
-    input[type="text"] {
-        width: 300px;
-        padding: 10px;
-        border: 1px solid #ccc;
-    }
-
-    input[type="button"] {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px;
-        border: none;
-        cursor: pointer;
-        margin-left: 10px;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px;
-    }
-
-    th, td {
-        border: 1px solid #ccc;
-        padding: 10px;
-        text-align: center;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-
-    tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-
-    tr:hover {
-        background-color: #ddd;
-    }
-</style>
-<body>
+    <form method="POST" class="row g-3"> {% csrf_token %}
+        <div class="col-auto">
+        <h5>Seleccione la nueva ubicacion</h5>
+        </div>
+        <div class="col-auto">
+        <input type="text" class="form-control" name="ubi" placeholder="314">
+        </div>
+        <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">Editar</button>
+        </div>
+    </form>
+    
     <div >
+        
         <table style="align-items: center;">
             <thead>
                 <tr>
@@ -78,6 +26,7 @@
                 </tr>
             </thead>
             <tbody>
+                
                 {%for h in historico%}
                 <tr>
                     <td>{{h.serial}}</td>
@@ -91,6 +40,4 @@
             </tbody>
           </table>
     </div>
-    
-</body>
-</html>
+{%endblock%}

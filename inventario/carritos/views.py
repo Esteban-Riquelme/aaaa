@@ -1,15 +1,17 @@
+from .models import *
 from telnetlib import LOGOUT
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import Permission, User, Group
 from django.shortcuts import redirect, render
 
-from carritos.models import *
+
 
 # Create your views here.
 
-def index(request):
+def carros(request):
     carritos= Carro.objects.all()
 
-    return render(request, "index.html",{"carros": carritos})
+    return render(request, "carros.html",{"carros": carritos})
     
 def home(request):
     return render(request, 'home.html')
@@ -22,36 +24,59 @@ def buscar(request):
     serial = request.POST['texto_b']
 
 def historico(request, codigo):
-    serial =Historico.serial
-    historico = Historico.objects.filter(serial=codigo)
-    return render(request,"historico.html",{"historico":historico})
+    if request.method == 'GET':
+        serial =Historico.serial
+        historico = Historico.objects.filter(serial=codigo)
+        image_name = f"image_{codigo}.png"
+
+        # Aquí debes agregar la lógica para obtener la URL completa de la imagen
+        image_url = f"{image_name}"
+        return render(request,"historico.html",{"i":image_url,"historico":historico})
+    elif request.method == 'POST':
+        ubi = request.POST['ubi']
     
 
 def sigin(request):
+    logout(request)
     if request.method == 'GET':
         return render(request, "login.html")
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
+      
         if user is not None:
             login(request,user)
-            return redirect('/index')
+            return redirect('home')
+            
         else:
             error = "Usuario incorrecto"
             return render(request, 'login.html', {'error':error})
     else:
         return render(request, "login.html")
 def notebook(request):
-    notebook= Notebook.objects.all()
-    return render(request,'notebook.html',{'note':notebook})
-
+    if request.method == 'GET':
+        notebook= Notebook.objects.all()
+        return render(request,'notebook.html',{'note':notebook})
+    else:
+        activo = username = request.POST['activo']
+        notebook= Notebook.objects.get(serial=activo)
+        return render(request,'notebook.html',{'ac':notebook})
 
 def contenido(request, codigo):
-    serial =Carro.serial
-    contenido = Notebook.objects.filter(Carro=codigo)
-    return render(request,"notebook.html",{"con":contenido})
+    if request.method == 'GET':
+        notebook = Notebook.objects.filter(carro = codigo)
+        return render(request,"notebook.html",{"con":notebook})
+    else:
+        activo = username = request.POST['activo']
+        notebook= Notebook.objects.get(serial=activo)
+        return render(request,'notebook.html',{'ac':notebook})
+
 
 def sigout(request):
     logout(request)
-    return render(request,'index.html')
+    return redirect('/')
+
+def proyector(request):
+    proyector= Proyector.objects.all()
+    return render(request,"proyectores.html",{'pro':proyector})

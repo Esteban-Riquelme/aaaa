@@ -1,12 +1,5 @@
 {%extends 'base.html'%}
 {%block content%}
-    <div>
-        <form action="/buscar/" method="POST">{%csrf_token%}
-            <input type="text" name="" id="texto_b">
-            <input type="button" value="buscar" >
-        </form>
-    </div>
-    <br>
     <div >
         <table style="align-items: center;">
             <thead>
@@ -17,9 +10,8 @@
                     <th>Año baja</th>
                     <th>ubicacion</th>
                     <th>Estado</th>
-                    {% if request.user.is_authenticated %}
+                    {% if perms.carritos %}
                     <th>Contenido</th>
-                    <th>Historico</th>
                     {% endif %}
                     
                 </tr>
@@ -33,14 +25,11 @@
                     <td>{{c.año_baja}}</td>
                     <td>{{c.ubicacion}}</td>
                     <td>{{c.estado}}</td>
-                    {% if request.user.is_authenticated %}
-                    <td><button><a href="contenido/{{c.serial}}">ver</a></button></td>
-                    <td><button><a href="historico/{{c.serial}}">ver</a></button></td>
-                    {% endif %}
+                    <td><a href="contenido/{{c.serial}}" class="btn btn-primary mb-3">ver</a></td>
+                    
                 </tr> 
                 {%endfor%}
             </tbody>
           </table>
-          <a href="login">click</a>
     </div>
     {%endblock%}

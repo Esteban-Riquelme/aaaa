@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+{%block content%}
+    <div style="margin: 0 auto;">
+        <table style="align-items: center;">
+            <thead>
+                <tr>
+                    <th>N Serial</th>
+                    <th>Activo Fijo</th>
+                    <th>Marca</th>
+                    <th>ubicacion</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for n in note%}
+                <tr>
+                    <td>{{n.serial}}</td>
+                    <td>{{n.activo_fijo}}</td>
+                    <td>{{n.marca}}</td>
+                    <td>{{n.ubicacion}}</td>
+                    <td>{{n.estado}}</td>
+                </tr> 
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+{%endblock%}

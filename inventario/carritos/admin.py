@@ -7,4 +7,6 @@ admin.site.register(Notebook)
 admin.site.register(Marca)
 admin.site.register(Historico)
 admin.site.register(Usuario)
+admin.site.register(Proyector)
+admin.site.register(PC)
 

@@ -28,8 +28,19 @@ class Carro(models.Model):
 class Notebook(models.Model):
     serial= models.CharField(primary_key=True,max_length=20)
     activo_fijo= models.CharField(max_length=20)
+    modelo = models.CharField(max_length=30)
     marca=models.ForeignKey(Marca, on_delete=models.CASCADE)
     carro= models.ForeignKey(Carro, on_delete=models.CASCADE)
+    ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE, null=True)
+    def __str__(self):
+        return self.serial
+
+class PC(models.Model):
+    serial= models.CharField(primary_key=True,max_length=20)
+    activo_fijo= models.CharField(max_length=20)
+    modelo = models.CharField(max_length=30)
+    marca=models.ForeignKey(Marca, on_delete=models.CASCADE)
+    ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE, null=True)
     def __str__(self):
         return self.serial
     
@@ -46,3 +57,12 @@ class Usuario (models.Model):
     passwrd = models.CharField(max_length=12)
     def __str__(self):
         return self.user
+
+class Proyector(models.Model):
+    serial= models.CharField(primary_key=True, max_length=20)
+    activo_fijo= models.CharField(max_length=20)
+    modelo = models.CharField(max_length=20)
+    ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE)
+    marca=models.ForeignKey(Marca, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.serial
