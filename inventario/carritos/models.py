@@ -32,6 +32,7 @@ class Notebook(models.Model):
     marca=models.ForeignKey(Marca, on_delete=models.CASCADE)
     carro= models.ForeignKey(Carro, on_delete=models.CASCADE)
     ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE, null=True)
+    imagen = models.ImageField(upload_to = 'act_notebook', null=True) 
     def __str__(self):
         return self.serial
 
@@ -41,6 +42,7 @@ class PC(models.Model):
     modelo = models.CharField(max_length=30)
     marca=models.ForeignKey(Marca, on_delete=models.CASCADE)
     ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE, null=True)
+    imagen = models.ImageField(upload_to = 'act_pc', null=True)
     def __str__(self):
         return self.serial
     
@@ -64,5 +66,6 @@ class Proyector(models.Model):
     modelo = models.CharField(max_length=20)
     ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE)
     marca=models.ForeignKey(Marca, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to = 'act_proyector', null=True)
     def __str__(self):
         return self.serial

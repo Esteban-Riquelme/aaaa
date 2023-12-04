@@ -1,0 +1,75 @@
+{%extends 'base.html'%}
+{%block content%}
+    <div style="margin: 0 auto;">
+        <form method="POST" class="row g-3"> {% csrf_token %}
+            <div class="col-auto">
+              <h5>Ingrese numero serial</h5>
+            </div>
+            <div class="col-auto">
+              <input type="text" class="form-control" name="activo" placeholder="3RDS34">
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+            </div>
+        </form>
+        <table style="align-items: center;">
+            <thead>
+                <tr>
+                    <th>N Serial</th>
+                    <th>Activo Fijo</th>
+                    <th>modelo</th>
+                    <th>Marca</th>
+                    <th>ubicacion</th>
+                    <th>imagen</th>
+                    {% if perms.notebook %}
+                    <th>Historico</th>
+                    {% endif %}
+
+                </tr>
+            </thead>
+            <tbody>
+                {%for p in pc%}
+                    <tr>
+                        <td>{{p.serial}}</td>
+                        <td>{{p.activo_fijo}}</td>
+                        <td>{{p.modelo}}</td>
+                        <td>{{p.marca}}</td>
+                        <td>{{p.ubicacion}}</td>
+                        <td>
+                            <a href="media/{{p.imagen}}">ver</a>
+                        </td>
+                        {% if perms.notebook %}
+                        <td><a href="historico/{{p.serial}}" class="btn btn-primary mb-3">ver</a></td>
+                        {% endif %}
+                    </tr> 
+                {%endfor%}
+                {%if ac%}
+                <tr>
+                    <td>{{ac.serial}}</td>
+                    <td>{{ac.activo_fijo}}</td>
+                    <td>{{ac.marca}}</td>
+                    <td>{{ac.carro}}</td>
+                    <td>{{ac.ubicacion}}</td>
+                    {% if perms.notebook %}
+                    <td><a href="historico/{{ac.serial}}" class="btn btn-primary mb-3">ver</a></td>
+                    {% endif %}
+                </tr>
+                {%endif%}
+                {%if note%}
+                    {%for n in note%}
+                    <tr>
+                        <td>{{n.serial}}</td>
+                        <td>{{n.activo_fijo}}</td>
+                        <td>{{n.marca}}</td>
+                        <td>{{n.carro}}</td>
+                        <td>{{n.ubicacion}}</td>
+                        {% if perms.notebook %}
+                        <td><a href="historico/{{n.serial}}" class="btn btn-primary mb-3">ver</a></td>
+                        {% endif %}
+                    </tr> 
+                    {%endfor%}
+                {%endif%}
+            </tbody>
+        </table>
+    </div>
+{%endblock%}

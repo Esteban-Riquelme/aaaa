@@ -5,7 +5,6 @@ from carritos import views
 urlpatterns =[
     path('home', views.home, name='home'),
     path('carros', views.carros, name='carros'),
-    path('vista', views.vista, name='vista'),
     path('Buscar/<codigo>', views.buscar, name='buscar'),
     path('historico/<codigo>', views.historico, name='historico'),
     path('', views.sigin, name='login'),
@@ -15,6 +14,7 @@ urlpatterns =[
     path('historico/logout', views.sigout, name='sigout'),
     path('contenido/logout', views.sigout, name='sigout'),
     path('logout', views.sigout, name='sigout'),
-    path('proyector',views.proyector, name='proyector')
+    path('proyector',views.proyector, name='proyector'),
+    path('pc',views.pc, name='pc'),
 
 ]
