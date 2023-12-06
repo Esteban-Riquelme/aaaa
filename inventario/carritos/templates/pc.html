@@ -35,8 +35,13 @@
                         <td>{{p.modelo}}</td>
                         <td>{{p.marca}}</td>
                         <td>{{p.ubicacion}}</td>
+                        
                         <td>
-                            <a href="media/{{p.imagen}}">ver</a>
+                            {% if p.imagen %}
+                                <a href="media/{{p.imagen}}">ver</a>
+                            {% else %}
+                                No tiene imagen
+                            {% endif %}    
                         </td>
                         {% if perms.notebook %}
                         <td><a href="historico/{{p.serial}}" class="btn btn-primary mb-3">ver</a></td>
