@@ -20,6 +20,7 @@
                     <th>Marca</th>
                     <th>Carro</th>
                     <th>ubicacion</th>
+                    <th>imagen</th>
                     {% if perms.notebook %}
                     <th>Historico</th>
                     {% endif %}
@@ -34,6 +35,13 @@
                     <td>{{ac.marca}}</td>
                     <td>{{ac.carro}}</td>
                     <td>{{ac.ubicacion}}</td>
+                    <td>
+                        {% if p.imagen %}
+                            <a href="media/{{ac.imagen}}">ver</a>
+                        {% else %}
+                            No tiene imagen
+                        {% endif %}    
+                    </td>
                     {% if perms.notebook %}
                     <td><a href="historico/{{ac.serial}}" class="btn btn-primary mb-3">ver</a></td>
                     {% endif %}
@@ -47,6 +55,13 @@
                         <td>{{n.marca}}</td>
                         <td>{{n.carro}}</td>
                         <td>{{n.ubicacion}}</td>
+                        <td>
+                            {% if p.imagen %}
+                                <a href="media/{{n.imagen}}">ver</a>
+                            {% else %}
+                                No tiene imagen
+                            {% endif %}    
+                        </td>
                         {% if perms.notebook %}
                         <td><a href="historico/{{n.serial}}" class="btn btn-primary mb-3">ver</a></td>
                         {% endif %}
@@ -60,6 +75,13 @@
                         <td>{{c.marca}}</td>
                         <td>{{c.carro}}</td>
                         <td>{{c.ubicacion}}</td>
+                        <td>
+                            {% if p.imagen %}
+                                <a href="media/{{p.imagen}}">ver</a>
+                            {% else %}
+                                No tiene imagen
+                            {% endif %}    
+                        </td>
                         {% if perms.notebook %}
                         <td><a href="historico/{{c.serial}}" class="btn btn-primary mb-3">ver</a></td>
                         {% endif %}
